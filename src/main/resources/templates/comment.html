@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Edit Comment</title>
+</head>
+<body>
+<form th:action="@{/saveComment}" th:object="${commentObj}">
+	<input  th:field="${name}" placeholder="Enter your name"><br>
+	<textarea  th:field="${email}" placeholder="your mailid"></textarea><br>
+	<textarea  th:field="*{comment}" placeholder="Comments.."></textarea><br>
+	<button type="submit" name="postId" th:value="${blogPost.id}">Comment</button>
+</form>  
+</body>
+</html>

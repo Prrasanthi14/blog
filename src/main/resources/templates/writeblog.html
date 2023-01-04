@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Writing Blog</title>
+   </head>
+   <body>
+      <div id="displayBlog">
+         <h1>New/Edit post</h1>
+         <form  th:action="@{/savePost}" method="post" th:object="${postObj}" >
+            <div id="title">
+               <br><br>
+               <h2><label>Title</label></h2><br>
+               <input type="text" th:field="*{title}" placeholder="Title"/>
+               <br>
+            </div>
+            <div id="author">
+               <br><br>
+               <h4><label>Author</label></h4><br>
+               <input type="text" th:field="*{author}" placeholder="Author name"/>
+               <br>
+            </div>
+            <div id="Excerpt">
+               <br><br>
+               <h4><label>Excerpt</label></h4><br>
+               <input type="text" th:field="*{excerpt}" placeholder="An outline of blog"/>
+               <br>
+            </div>
+            <div id="tag">
+               <br>
+               <label id="label">Tags</label>
+               <br>
+               <div th:if="${postObj.id==0}">
+               <input type="text"  name="tag" th:value="${tagList}" placeholder="Enter tags related to blog" >
+               </div>
+               <input type="hidden"  name="tag">
+            </div>
+            <div id="content">
+               <br><br>
+               <h4><label>Content</label></h4><br>
+               <textarea th:field="*{content}" rows="25" cols="60" placeholder="Start writing your blog"></textarea>
+               <br><br>
+            </div>
+            <div id="submit">
+               <input type="Submit" class="submit"/>
+            </div>
+         </form>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:href="@{src/main/resources/static/index.css}" rel="stylesheet" />
+</head>
+<body>
+<h1> Blogs </h1>
+<br><br>
+<form action="#" th:action="@{/showWritePage}" >
+To Create new post <input type="submit" value="NewPost">
+</form>
+<br><br>
+ <form  th:action="@{/search}">
+                Search post: <input type="text" name="theSearchName" />
+                <input type="submit" value="Search"/>
+</form>
+<br><br>
+<form action="#" th:action="@{/sort}">
+     <select name="sortValue">
+          <option th:value="author" th:text="author"></option>
+          <option th:value="title" th:text="title"></option>
+          <option th:value="published_at" th:text="published_at"></option>
+    </select>
+        <input type="submit" value="Sort"/>
+</form> 
+<form action="#" th:action="@{/reset}">
+                <input type="submit" value="Reset sort"/>
+</form>
+<br><br>
+<form action="#" th:action="@{/filter}">
+    <select name="authorName" multiple>
+    	<option th:each="authorName:${blogAuthor}"th:value="${authorName}" th:text="${authorName}">
+    	</option>
+    </select>
+    <select name="tag" multiple >
+        <option th:each="tagName:${blogTags}" th:value="${tagName}" th:text="${tagName}">
+        </option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+<br><br>
+<div id="container">
+<table border="1">
+<thead>
+<tr>
+<th>Title</th>
+<th>Excerpt</th>
+<th>Author</th>
+<th>Published_At</th>
+<th>Tags</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="postlist:${blogPosts}">
+    <td th:text="${ postlist.title}"></td>
+    <td th:text="${ postlist.excerpt}"></td>
+    <td th:text="${ postlist.author}"></td>
+	<td th:text="${ postlist.published_at}"></td>
+    <td >
+        <h6 th:each="tag:${postlist.tags}" th:text="${tag.name}"></h6>
+    </td>
+	<td th:text="${ postlist.content}"></td>
+	<td>
+		<form action="#" th:action="@{/viewBlog}">
+			<button type="submit" name="postId" th:value="${postlist.id}">View</button>
+		</form>
+	</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+tr{
+    box-sizing: content-box;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Read Blog</title>
+</head>
+<body>
+<div style="text-align:center">
+<h1 th:text="${blogPost.title}"></h1>
+<h4 th:text="${blogPost.author}"></h4>
+<p th:text="${blogPost.content}"></p>
+</div>
+<br>
+
+<form action="#" th:action="@{/editBlog}">
+ 	<button type="submit" name="postId" th:value="${blogPost.id}">Edit</button>
+ </form>
+<br>
+<form th:action="@{/deleteBlog}">
+	<button type="submit" name="postId" th:value="${blogPost.id}">Delete</button>
+</form>
+<br><br>
+
+<form th:action="@{/saveComment}" th:object="${commentObj}">
+	<input  th:field="*{name}" placeholder="Enter your name"><br>
+	<textarea  th:field="*{email}" placeholder="your mailid"></textarea><br>
+	<textarea  th:field="*{comment}" placeholder="Comments.."></textarea><br>
+	<button type="submit" name="postId" th:value="${blogPost.id}">Comment</button>
+</form>         
+<br><br>
+<table>
+<tr th:each="commentList:${blogPost.comments}">
+<td th:text="${ commentList.name}">
+<td th:text="${ commentList.email}">
+<td th:text="${ commentList.comment}">
+<td>
+<form th:action="@{/deleteComment}">
+<input type="hidden" name="postId" th:value="${blogPost.id}"/>
+<button type="submit" name="commentId" th:value="${commentList.id}">Delete</button></form>
+</td>
+<td>
+<form th:action="@{/editComment}">
+<input type="hidden" name="postId" th:value="${blogPost.id}"/>
+<input type="hidden" name="commentContent" th:value="${commentList.comment}"/>
+<button type="submit" name="commentId" th:value="${commentList.id}">Edit</button></form>
+</td>
+</tr> 
+</table>
+</body>
+</html>
